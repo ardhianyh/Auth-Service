@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AuthGoogleController, AuthVerifyEmailController, InsertUserController } from "../controllers";
+import { AuthGoogleController, AuthLogoutController, AuthVerifyEmailController, InsertUserController } from "../controllers";
 import { AuthLoginController } from "../controllers/auth-login-controller";
 import passport from 'passport';
 
@@ -19,5 +19,6 @@ router.get(
 
 router.post('/login', AuthLoginController);
 router.post('/register', InsertUserController);
+router.get('/logout', AuthLogoutController);
 
 export const authRouter = router;
