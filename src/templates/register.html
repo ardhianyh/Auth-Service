@@ -108,7 +108,7 @@
 <body>
    <div class="register-container">
       <h1>Sign Up</h1>
-      <form action="/auth/register" method="POST">
+      <form id="registrationForm" action="/auth/register" method="POST" onsubmit="return validateForm()">
          <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -129,6 +129,54 @@
          <button class="primary" type="submit">Sign Up</button>
       </form>
    </div>
+
+   <script>
+      function validateForm() {
+         let password = document.getElementById("password").value;
+         let confirmPassword = document.getElementById("confirm-password").value;
+
+         let lowerCaseRegex = /[a-z]/;
+         let upperCaseRegex = /[A-Z]/;
+         let digitRegex = /\d/;
+         let specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+         let minLength = 8;
+
+         let errors = [];
+
+         if (!lowerCaseRegex.test(password)) {
+            errors.push("Password must contain at least one lowercase character.");
+         }
+
+         if (!upperCaseRegex.test(password)) {
+            errors.push("Password must contain at least one uppercase character.");
+         }
+
+         if (!digitRegex.test(password)) {
+            errors.push("Password must contain at least one digit character.");
+         }
+
+         if (!specialCharRegex.test(password)) {
+            errors.push("Password must contain at least one special character.");
+         }
+
+         if (password.length < minLength) {
+            errors.push("Password must be at least 8 characters long.");
+         }
+
+         if (password !== confirmPassword) {
+            errors.push("Passwords do not match.");
+         }
+
+         if (errors.length > 0) {
+            alert("Validation Errors:\n" + errors.join("\n"));
+            return false;
+         }
+
+         document.getElementById("registrationForm").submit();
+         return false;
+      }
+   </script>
+
 </body>
 
 </html>
