@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { userRepository } from "../repositories";
 import { generateSession, requestValidation } from "../utils";
+import path from "path";
 
 export const AuthVerifyEmailController = async (
    req: Request,
@@ -41,7 +42,8 @@ export const AuthVerifyEmailController = async (
       return res.status(400).send(userSession.message);
    }
 
-   res.cookie('session_id', userSession.id);
+   const rootDirectory = path.resolve('./');
 
-   return res.status(200).send('User verified Successfully');
+   res.cookie('session_id', userSession.id);
+   return res.sendFile(rootDirectory + '/src/templates/verified.html');
 }

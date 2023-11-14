@@ -3,6 +3,7 @@ import { ISource, IUser } from "../types/user";
 import { userRepository } from "../repositories";
 import bcrypt from 'bcrypt';
 import { emailService, generateToken, requestValidation } from "../utils";
+import path from "path";
 
 export const InsertUserController = async (
    req: Request,
@@ -61,5 +62,8 @@ export const InsertUserController = async (
    const sendEmail = await emailService.sendVerificationEmail(email, insertedToken);
    if (!sendEmail) console.log('Send Email Verification Error!');
 
-   return res.status(201).send('Email Verification Sent!');
+
+   const rootDirectory = path.resolve('./');
+
+   return res.sendFile(rootDirectory + '/src/templates/verification.html');
 }
