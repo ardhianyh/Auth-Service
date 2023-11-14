@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { userRepository } from "../repositories";
-import { requestValidation } from "../utils";
+import { generateSession, requestValidation } from "../utils";
 import bcrypt from 'bcrypt';
 
 export const AuthLoginController = async (
@@ -39,10 +39,7 @@ export const AuthLoginController = async (
       return res.status(401).send('Invalid Credentials!');
    }
 
-   const expirationDate = new Date();
-   expirationDate.setHours(expirationDate.getHours() + 1);
-
-   const userSession = await userRepository.insertUserSession(user.id, expirationDate.toISOString());
+   const userSession = await generateSession(user.id);
    if (userSession instanceof Error) {
       return res.status(400).send(userSession.message);
    }

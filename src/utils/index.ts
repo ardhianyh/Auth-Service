@@ -3,3 +3,4 @@ export * from './request-validation';
 export * from './generate-token';
 export * from './email-service';
 export * from './get-session';
+export * from './generate-session';

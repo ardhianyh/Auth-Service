@@ -6,7 +6,7 @@ export enum ISource {
 export interface IUser {
   name: string;
   email: string;
-  password: string;
+  password?: string;
   source: ISource
 }
 
@@ -25,4 +25,12 @@ export interface IUserSession {
   id: string;
   user_id: string;
   created_at: string;
+}
+
+export interface IGoogleUser {
+  name: {
+    givenName: string;
+    familyName: string;
+  },
+  email: string;
 }

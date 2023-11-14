@@ -61,5 +61,5 @@ export const InsertUserController = async (
    const sendEmail = await emailService.sendVerificationEmail(email, insertedToken);
    if (!sendEmail) console.log('Send Email Verification Error!');
 
-   return res.status(201).send(userUpsert);
+   return res.status(201).send('Email Verification Sent!');
 }

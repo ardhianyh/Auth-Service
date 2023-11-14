@@ -107,7 +107,7 @@
 <body>
   <div class="login-container">
     <h1>Login</h1>
-    <form>
+    <form method="POST" action="/auth/login">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" id="email" name="email" placeholder="Enter your email" required>
@@ -119,11 +119,17 @@
       <button class="primary" type="submit">Login</button>
     </form>
     <hr>
-    <button class="google-button">
+    <button id="google" class="google-button">
       <img src="https://cdnlogo.com/logos/g/35/google-icon.svg" alt="Google Icon" class="google-icon">
       Login with Google
     </button>
   </div>
+
+  <script>
+    document.getElementById('google').onclick = function () {
+      window.location = '/auth/google'
+    }
+  </script>
 </body>
 
 </html>

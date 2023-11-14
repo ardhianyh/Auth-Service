@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { userRepository } from "../repositories";
-import { requestValidation } from "../utils";
+import { generateSession, requestValidation } from "../utils";
 
 export const AuthVerifyEmailController = async (
    req: Request,
@@ -35,6 +35,13 @@ export const AuthVerifyEmailController = async (
    if (verifiedUser instanceof Error) {
       return res.status(400).send(verifiedUser.message);
    }
+
+   const userSession = await generateSession(userToken.user_id);
+   if (userSession instanceof Error) {
+      return res.status(400).send(userSession.message);
+   }
+
+   res.cookie('session_id', userSession.id);
 
    return res.status(200).send('User verified Successfully');
 }

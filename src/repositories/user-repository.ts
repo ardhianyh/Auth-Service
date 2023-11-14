@@ -28,10 +28,14 @@ export class UserRepository {
       };
    }
 
-   async getUserByEmail(email: string): Promise<{ id: string, password: string } | Error> {
+   async getUserByEmail(email: string): Promise<{ id: string, password: string } | Error | undefined> {
       const query = await this.database.query<IUserPasswordResponse>("SELECT * FROM public.user WHERE email = $1", [email]);
       if (query instanceof Error) {
          return query;
+      }
+
+      if (query.rows.length === 0) {
+         return undefined;
       }
 
       const result = query.rows[0];
@@ -51,6 +55,32 @@ export class UserRepository {
          user.name,
          user.email,
          user.password,
+         user.source
+      ]);
+
+      if (query instanceof Error) {
+         return query;
+      }
+
+      const result = query.rows[0];
+      return {
+         id: result.id,
+         name: result.name,
+         email: result.email,
+         source: result.source,
+         created_at: result.created_at
+      };
+   }
+
+   async insertGoogleUser(user: IUser): Promise<IUserResponse | Error> {
+      const query = await this.database.query<IUserResponse>(`
+         INSERT INTO public.user 
+         (name, email, source) 
+         VALUES ($1, $2, $3) 
+         RETURNING *
+      `, [
+         user.name,
+         user.email,
          user.source
       ]);
 
