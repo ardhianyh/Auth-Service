@@ -4,13 +4,12 @@ import { AuthMiddleware, VerifiedMiddleware } from "../middleware";
 
 const router = Router();
 
-router.get('/',
-   [
-      AuthMiddleware,
-      VerifiedMiddleware
-   ],
-   GetUserController
-);
+router.use([
+   AuthMiddleware,
+   VerifiedMiddleware
+]);
+
+router.get('/', GetUserController);
 router.get('/:userId', GetUserByIdController);
 router.post('/', InsertUserController);
 router.put('/:userId', UpdateUserController);

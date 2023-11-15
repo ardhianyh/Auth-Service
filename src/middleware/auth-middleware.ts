@@ -8,13 +8,13 @@ export const AuthMiddleware = async (
 ): Promise<Response | void> => {
    const sessionId = req.cookies.session_id;
    if (!sessionId) {
-      return res.status(403).send('Forbidden Access!');
+      return res.redirect('/login')
    }
 
    const session = await getSession(sessionId);
    if (!session) {
       res.clearCookie('session_id');
-      return res.status(403).send('Invalid Session! please re-login');
+      return res.redirect('/login');
    }
 
    const currentTime = new Date().getTime();
@@ -22,7 +22,7 @@ export const AuthMiddleware = async (
 
    if (currentTime >= expiredTime) {
       res.clearCookie('session_id');
-      return res.status(403).send('Session Expired! Please re-login');
+      return res.redirect('/login');
    }
 
    return next();

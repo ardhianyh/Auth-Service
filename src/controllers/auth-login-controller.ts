@@ -45,5 +45,5 @@ export const AuthLoginController = async (
    }
 
    res.cookie('session_id', userSession.id);
-   return res.status(200).send({ session_id: userSession.id });
+   return res.redirect('/');
 }
