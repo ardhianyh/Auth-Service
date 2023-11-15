@@ -24,6 +24,7 @@ CREATE TABLE public.user_verified (
 CREATE TABLE public.user_session (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   user_id UUID NOT NULL,
+  is_active BOOLEAN,
   expired_at TIMESTAMPTZ NOT NULL,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );

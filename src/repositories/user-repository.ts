@@ -223,9 +223,10 @@ export class UserRepository {
    async getUserSession(sessionId: string): Promise<ISession | Error> {
       const query = await this.database.query<ISession>(`
          SELECT * FROM public.user_session 
-         WHERE id = $1
+         WHERE id = $1 AND is_active = $2
       `, [
-         sessionId
+         sessionId,
+         true
       ]);
 
       if (query instanceof Error) {
@@ -238,12 +239,13 @@ export class UserRepository {
    async insertUserSession(userId: string, expired_at: string): Promise<IUserSession | Error> {
       const query = await this.database.query<IUserSession>(`
          INSERT INTO public.user_session 
-         (user_id, expired_at) 
-         VALUES ($1, $2)
+         (user_id, expired_at, is_active) 
+         VALUES ($1, $2, $3)
          RETURNING *
       `, [
          userId,
-         expired_at
+         expired_at,
+         true
       ]);
 
       if (query instanceof Error) {
@@ -253,11 +255,14 @@ export class UserRepository {
       return query.rows[0];
    }
 
-   async deleteUserSession(sessionId: string): Promise<{} | Error> {
+   async invokeUserSession(sessionId: string): Promise<{} | Error> {
       const query = await this.database.query<IUserSession>(`
-         DELETE FROM public.user_session 
-         WHERE id = $1
+         UPDATE public.user_session 
+         SET 
+            is_active = $1
+         WHERE id = $2
       `, [
+         false,
          sessionId
       ]);
 
@@ -265,7 +270,7 @@ export class UserRepository {
          return query;
       }
 
-      return { message: "Delete Succeed!" };
+      return { message: "Invoke Session Succeed!" };
    }
 
 }

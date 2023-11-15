@@ -19,6 +19,6 @@ router.get(
 
 router.post('/login', AuthLoginController);
 router.post('/register', InsertUserController);
-router.get('/logout', AuthLogoutController);
+router.post('/logout', AuthLogoutController);
 
 export const authRouter = router;

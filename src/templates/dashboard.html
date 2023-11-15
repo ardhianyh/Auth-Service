@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+
+    .dashboard-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+
+    .statistics {
+      margin-bottom: 20px;
+    }
+
+    .statistics p {
+      margin: 8px 0;
+    }
+
+    .user-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .logout-button {
+      align-self: flex-end;
+      margin-top: 30px;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .logout-button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+
+      th,
+      td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      th {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <h1>User Dashboard</h1>
+
+    <!-- Statistics Section -->
+    <div class="statistics">
+      <p>Total Users: <span id="totalUsers">0</span></p>
+      <p>Active Sessions Today: <span id="activeSessionsToday">0</span></p>
+      <p>Average Active Sessions (Last 7 Days): <span id="averageSessionsLast7Days">0</span></p>
+    </div>
+
+    <!-- User Table Section -->
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Signup Timestamp</th>
+          <th>Logins</th>
+          <th>Last Session Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>User 1</td>
+          <td>2023-01-01 12:30 PM</td>
+          <td>5</td>
+          <td>2023-01-05 10:45 AM</td>
+        </tr>
+        <tr>
+          <td>User 2</td>
+          <td>2023-01-02 03:15 PM</td>
+          <td>8</td>
+          <td>2023-01-04 08:20 AM</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form action="/auth/logout" method="POST">
+      <button type="submit" class="logout-button" onclick="logout()">Logout</button>
+    </form>
+  </div>
+</body>
+
+</html>

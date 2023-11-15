@@ -11,7 +11,7 @@ router.get(
    '/',
    AuthMiddleware,
    (_: Request, res: Response) => {
-      res.send('hello world');
+      res.sendFile(rootDirectory + '/src/templates/dashboard.html');
    }
 );
 

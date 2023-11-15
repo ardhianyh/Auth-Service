@@ -7,7 +7,7 @@ export const AuthLogoutController = async (
 ): Promise<Response | void> => {
 
    const sessionId = req.cookies.session_id as string;
-   await userRepository.deleteUserSession(sessionId);
+   await userRepository.invokeUserSession(sessionId);
 
    res.clearCookie('session_id');
    return res.redirect('/login');
