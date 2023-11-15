@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+
+    .user-profile {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    button {
+      background-color: rgb(177, 177, 177);
+      color: #000;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="user-profile">
+    <h1>User Profile</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Test Name</td>
+          <td>test@test.com</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button id="reset-password" style="margin-top: 20px;">Reset Password</button>
+
+    <button id="dashboard" style="margin-top: 10px;">Go to Dashboard</button>
+  </div>
+  <script>
+    document.getElementById('reset-password').onclick = function () {
+      window.location = '/reset-password'
+    }
+
+    document.getElementById('dashboard').onclick = function () {
+      window.location = '/'
+    }
+  </script>
+</body>
+
+</html>

@@ -31,6 +31,22 @@ router.get(
    }
 );
 
+router.get(
+   '/profile',
+   AuthMiddleware,
+   (_: Request, res: Response) => {
+      res.sendFile(rootDirectory + '/src/templates/profile.html');
+   }
+);
+
+router.get(
+   '/reset-password',
+   AuthMiddleware,
+   (_: Request, res: Response) => {
+      res.sendFile(rootDirectory + '/src/templates/reset-password.html');
+   }
+);
+
 router.use('/auth', authRouter);
 router.use('/users', userRouter);
 
